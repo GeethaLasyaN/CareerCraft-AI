@@ -1,13 +1,4 @@
 import { useState } from "react"
-import { GoogleGenerativeAI } from "@google/generative-ai"
-
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY
-
-const genAI = new GoogleGenerativeAI(apiKey)
-
-const model = genAI.getGenerativeModel({
-  model: "gemini-2.0-flash-lite",
-})
 
 export default function FloatingChatbot() {
 
@@ -35,41 +26,22 @@ export default function FloatingChatbot() {
 
     setChat((prev) => [...prev, userMessage])
 
-    const currentMessage = message
-
     setMessage("")
 
     setLoading(true)
 
-    try {
-
-      const result = await model.generateContent(currentMessage)
-
-      const response = await result.response
-
-      const text = response.text()
+    setTimeout(() => {
 
       const aiMessage = {
         type: "ai",
-        text: text
+        text: "AI features are currently unavailable."
       }
 
       setChat((prev) => [...prev, aiMessage])
 
-    } catch (error) {
+      setLoading(false)
 
-      console.log("FULL GEMINI ERROR:", error)
-
-      const errorMessage = {
-        type: "ai",
-        text: error.message || "Gemini API Error"
-      }
-
-      setChat((prev) => [...prev, errorMessage])
-
-    }
-
-    setLoading(false)
+    }, 1000)
 
   }
 
@@ -203,7 +175,7 @@ export default function FloatingChatbot() {
 
           {/* INPUT */}
 
-          <div className="p-5 border-t border-white/10 flex gap-3 bg-white/[0.02]">
+          <div className="p-5 border-t border-white/10 flex gap-3">
 
             <input
               type="text"
