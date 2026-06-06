@@ -29,3 +29,5 @@ https://geethalasya-careercraft.vercel.app
 ## GitHub Repository
 
 https://github.com/GeethaLasyaN/CareerCraft-AI
+
+Updated for GitHub achievements.
